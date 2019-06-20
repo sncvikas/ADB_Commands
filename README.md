@@ -4,125 +4,124 @@
 
 
 # Generic ADB Commands
-### Below is list of most widely used ADB commands while working with Android platform.
+### Below is list of adb commands used widely while working with Android platform.
 
-#### List devices with name, serial number<br/>
+#### List devices with name, serial number
 	adb devices –l
 
-#### Clear logcat<br/>
+#### Clear logcat
 	adb logcat –c
 
-#### Collect logcat continuously and save to a file  (-v time, logs time. -b all, logs all buffers). It should be stopped explicitly.<br>
+#### Collect logcat continuously and save to a file  (-v time, logs the time. -b all, logs all buffers). It should be stopped explicitly.
 	adb logcat –v time –b all > my-logcat.txt
 
 
-#### Dump existing logs into a file. It should be stopped explicitly.<br/>
+#### Dump existing logs into a file. It stops automatically.
 	adb logcat –v time –b all –d > dump-logcat.txtx
 
-#### Collect bugreport<br/>
+#### Collect bugreport
 ##### Older versions of adb, only .txt is saved
-	adb bugreport > bugreport.txt <br>
+	adb bugreport > bugreport.txt
 ##### newer versions of adb, all files put into a zip
 	adb bugreport
 
-#### Change logcat buffer size to maximum <em>16MB</em><br/>
+#### Change logcat buffer size to maximum <em>16MB</em>
 	adb logcat -b all -G 16777216
 
-#### List applications installed in the device<br/>
+#### List applications installed in the device
 	adb shell pm list packages
 
-#### List third party apps only<br/>
+#### List third party apps only
 	adb shell pm list packages -3
 
-#### List system apps only<br/>
+#### List system apps only
 	adb shell pm list packages -s
 
-#### List enabled packages only<br/>
+#### List enabled packages only
 	adb shell pm list packages -e
 
-
-#### List disabled packages only<br/>
+#### List disabled packages only
 	adb shell pm list packages -d
 
-#### Disable an application, in eng buildsn only<br/>
+#### Disable an application, in eng builds only
 	adb shell pm disable <package_name>
 
-#### Enable an application, in eng buildsn only<br/>
+#### Enable an application, in eng builds only
 	adb shell pm enable <package_name>
 
-#### Get build type<br/>
+#### Get build type
 	adb shell getprop ro.build.type
 
-#### Get build display id<br/>
+#### Get build display id
 	adb shell getprop ro.build.display.id
 
-#### Get build fingerprint<br/>
+#### Get build fingerprint
 	adb shell getprop ro.build.fingerprint
 
-#### Press any key on device<br/>
+#### Press any key on device
 	adb shell input keyevent <KEYCODE>
 	Keycodes are
 		adb shell input keyevent  KEYCODE_MENU
 		adb shell input keyevent  KEYCODE_HOME
 		adb shell input keyevent  KEYCODE_BACK
-	All keycodes can be found here https://developer.android.com/reference/android/view/KeyEvent#constants_2
+##### [All keycodes can be found here](https://developer.android.com/reference/android/view/KeyEvent#constants_2)
 
-#### Push file to the device <br/>
+#### Push file to the device
 	adb push <path_to_src_file_in_pc> <path_to_dest_file_in_device>
 
-#### Pull a file from the device<br/>
+#### Pull a file from the device
 	adb pull <path_to_src_file_in_device> <path_to_dest_file_in_pc>
 
-#### Reboot the device<br/>
+#### Reboot the device
 	adb reboot
 
-#### Reboot into bootloader<br/>
+#### Reboot into bootloader
 	adb reboot bootloader
 
-#### Reboot into recovery<br/>
+#### Reboot into recovery
 	adb reboot recovery
 
-#### Take a screenshot<br/>
+#### Take a screenshot
 	adb shell screencap /sdcard/my_snap.png
 
 	Image will be stored in sdcard, it needs to be pulled into the PC by using adb pull command
 
-#### Record screen<br/>
+#### Record screen
 	adb screenrecord /sdcard/my_video.mp4
 
 	Records for a maximum(default) 3 minutes
 
-#### Enter text on the focussed edit text<br/>
+#### Enter text on the focussed edit text
 	adb shell input text <mytext>
 
-	Spaces are not allowed in text
+	//Spaces are not allowed in text
 
-#### Install an app <br/>
+#### Install an app
 	adb install <path_to_apk_in_pc>
 
-#### Re-install an app . If the app is already installed , it will uninstalled before installing again)<br/>
+#### Re-install an app . If the app is already installed , it will uninstalled before installing again
 	adb install –r <path_to_apk_in_pc>
 
-#### Install an app in external storage<br/>
+#### Install an app in external storage
 	adb install –s <path_to_apk_in_pc>
 
-#### Uninstall an app<br/>
+#### Uninstall an app
 	adb uninstall <package_name_of_the_application>
 
-#### Get android version<br/>
+#### Get android version
 	adb shell getprop ro.build.version.sdk
 
-#### Force stop an application<br/>
+#### Force stop an application
 	adb shell am force-stop <package_name_of_the_application>
 
-#### Remount system partition as read write, ENG build only<br/>
+#### Remount system partition as read write, engineering build only
 	adb remount
 
-#### Get selinux state<br/>
+#### Get selinux state
 	adb shell getenforce
 
-#### Set selinux state, ENG build only<br/>
+#### Set selinux state, engineering build only
 	adb shell setenforce 1
 
-#### Remove selinux enforcement, ENG build only<br/>
+#### Remove selinux enforcement, engineering build only
 	adb shell setenforce 0
