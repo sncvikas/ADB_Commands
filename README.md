@@ -17,7 +17,7 @@
 
 
 #### Dump existing logs into a file. It stops automatically.
-	adb logcat –v time –b all –d > dump-logcat.txtx
+	adb logcat –v time –b all –d > dump-logcat.txt
 
 #### Collect bugreport
 ##### Older versions of adb, only .txt is saved
@@ -99,7 +99,7 @@
 #### Install an app
 	adb install <path_to_apk_in_pc>
 
-#### Re-install an app . If the app is already installed , it will uninstalled before installing again
+#### Re-install an app . If the app is already installed , it will be uninstalled before installing again
 	adb install –r <path_to_apk_in_pc>
 
 #### Install an app in external storage
@@ -125,3 +125,58 @@
 
 #### Remove selinux enforcement, engineering build only
 	adb shell setenforce 0
+
+<details><summary>Connect ADB over WiFi</summary>
+<p>
+
+##### When device is connected over WiFi, all adb commands can be sent over WiFi.
+
+```
+1. Connect device and PC to the same network
+2. Connect device over USB cable and Enable USB Debugging in device
+3. Once detected over USB, run
+	adb tcpip 5555
+	// this restarts adb in device
+4. Disconnect USB cable now, and run
+	adb connect <device_ip_address>:5555
+	//this restarts adb to communicate over WiFi with input IP address
+5. To disconnect adb from WiFi mode run
+	adb disconnect <device_ip_address>:5555
+```
+
+</p>
+</details>
+
+<br/>
+<details><summary>Start an actiivty from adb</summary>
+<p>
+
+##### We can start any activity from adb commands either explicitly by mentioning the name of the package and name of the class, or implicitly by just the name of intent action.
+
+```
+Implicit intent to launch settings application
+	adb shell am start -a android.settings.SETTINGS
+Launch Bluetooth settings
+	adb shell am start -a android.settings.BLUETOOTH_SETTINGS
+```
+```
+Explicit intent to launch settings app using name of the package and activity class. You must know the name of activity class to launch it via adb
+	adb shell am start -n com.android.settings/.Settings
+```
+```
+Pass extras for the intent via adb to start an activity.
+1. Open google.com by sending an adb command
+	adb shell am start -a android.intent.action.VIEW -t text/html -d http://www.google.com
+	// Here android.intent.action.VIEW is standard intent action, -t text/html is the mimetype of the data sent with intent, -d <url> is the data to be used by the intent.
+
+2. Open an image in Photos application
+	adb shell am start -a android.intent.action.VIEW -t image/* -d /sdcard/abc.png
+	// ensure you have abc.png in /sdcard/
+
+3. Open camera application to capture an image
+	adb shell am start -a android.media.action.IMAGE_CAPTURE
+```
+Intent actions for all settings can be [found here](https://developer.android.com/reference/android/provider/Settings#constants_2)
+
+
+</details>
