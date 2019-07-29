@@ -180,3 +180,21 @@ Intent actions for all settings can be [found here](https://developer.android.co
 
 
 </details>
+
+#### Enable data saver mode
+	adb shell cmd netpolicy set restrict-background true
+
+#### Disable data saver mode
+	adb shell cmd netpolicy set restrict-background false
+
+#### Add an app to data saver mode whitelist
+	adb shell cmd netpolicy add restrict-background-whitelist <package_name>
+
+#### Remove an app from data saver mode whitelist
+	adb shell cmd netpolicy add restrict-background-whitelist <package_name>
+
+#### List all WiFi networks
+	adb shell cmd netpolicy list wifi-networks
+
+#### Make a non-metered WiFI newtork into a metered one
+	adb shell cmd netpolicy set metered-network <WIFI_SSID> true
