@@ -12,6 +12,9 @@
 #### Clear logcat
 	adb logcat –c
 
+#### Send a command to a specific device when multiple devices are connected
+	adb -s <serial_number_of_device> <command>
+
 #### Collect logcat continuously and save to a file  (-v time, logs the time. -b all, logs all buffers). It should be stopped explicitly.
 	adb logcat –v time –b all > my-logcat.txt
 
