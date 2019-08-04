@@ -201,3 +201,16 @@ Intent actions for all settings can be [found here](https://developer.android.co
 
 #### Make a non-metered WiFI newtork into a metered one
 	adb shell cmd netpolicy set metered-network <WIFI_SSID> true
+
+#### Simulate unplug battery event
+	adb shell dumpsys battery unplug
+
+#### Reset battery unplug
+	adb shell dumpsys battery reset
+
+#### Send app to stand by state
+	adb shell dumpsys battery unplug
+	adb shell am set-inactive <package_name> true
+
+#### Remove app from stand by state
+	adb shell am set-inactive <package_name> false
