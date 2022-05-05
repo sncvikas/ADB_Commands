@@ -6,6 +6,15 @@
 # Generic ADB Commands
 ### Below is list of adb commands used widely while working with Android platform.
 
+
+### Start ADB Server
+
+	adb start-server
+
+### Stop ADB Server
+
+	adb kill-server 
+
 #### List devices with name, serial number
 	adb devices –l
 
